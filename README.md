@@ -17,34 +17,36 @@ The BibTeX entry for citing our paper:
 
 ## Project Outline
 
-config/                     # Configuration files
-global.yaml               # Global settings (e.g., max_replenish, lead time)
-hyperparameter_registry.py  # Hyperparameter search ranges for Ray Tune
-ds/                       # DS model configs (ds_base.yaml, ds_none.yaml, etc.)
-rl/                       # RL model configs (ddpg_*.yaml, ppo_*.yaml)
-search_engine.py          # Universal hyperparameter search engine
+```
+config/                         # Configuration files
+├── global.yaml                 # Global settings (e.g., max_replenish, lead time)
+├── hyperparameter_registry.py  # Hyperparameter search ranges for Ray Tune
+├── ds/                         # DS model configs (ds_base.yaml, ds_none.yaml, etc.)
+├── rl/                         # RL model configs (ddpg_*.yaml, ppo_*.yaml)
+└── search_engine.py            # Universal hyperparameter search engine
 
-synthetic_data/             # Data generation scripts and generated datasets
-gene_syn_data_ind.py      # Setting 1: independent demand
-gene_syn_data_ar1.py      # Settings 2 & 3: AR(1) demand
-gene_syn_data_iid.py      # Setting 4: i.i.d. demand
+synthetic_data/                 # Data generation scripts and generated datasets
+├── gene_syn_data_ind.py        # Setting 1: independent demand
+├── gene_syn_data_ar1.py        # Settings 2 & 3: AR(1) demand
+└── gene_syn_data_iid.py        # Setting 4: i.i.d. demand
 
-ds/                         # Direct Supervision (DS) model
-main_ds.py                # Training entry point
-hyperparameter_sweep_ds.py  # Hyperparameter tuning
-trainer.py                # Training loop
-neural_network.py         # Network architecture
-simulation.py             # DS environment
-configs.py                # DS configuration loader
-dataset.py                # Dataset utilities
+ds/                             # Direct Supervision (DS) model
+├── main_ds.py                  # Training entry point
+├── hyperparameter_sweep_ds.py  # Hyperparameter tuning
+├── trainer.py                  # Training loop
+├── neural_network.py           # Network architecture
+├── simulation.py               # DS environment
+├── configs.py                  # DS configuration loader
+└── dataset.py                  # Dataset utilities
 
-rl/                         # Reinforcement Learning (DDPG & PPO)
-main_rl.py                # Training entry point
-hyperparameter_sweep_ddpg.py  # DDPG hyperparameter tuning
-hyperparameter_sweep_ppo.py   # PPO hyperparameter tuning
-trainer.py                # Training loop
-trainer_ddpg_critic.py    # DDPG critic training
-inv_env.py                # Gym environment
+rl/                             # Reinforcement Learning (DDPG & PPO)
+├── main_rl.py                  # Training entry point
+├── hyperparameter_sweep_ddpg.py  # DDPG hyperparameter tuning
+├── hyperparameter_sweep_ppo.py   # PPO hyperparameter tuning
+├── trainer.py                  # Training loop
+├── trainer_ddpg_critic.py      # DDPG critic training
+└── inv_env.py                  # Gym environment
+```
 
 ## Data Generation
 
@@ -57,7 +59,8 @@ Scripts are in `synthetic_data/`:
 ## Configuration
 
 - `config/global.yaml`: global parameters (lead time, review period, max replenishment, etc.)
-- `config/ds/*.yaml` and `config/rl/*.yaml`: model-specific hyperparameters. Configs with `_base` use the base-stock policy regularization; configs with `_none` use no regularization; configs with `_coeff_base` and `_coeff_none` use coefficient-based variants.
+- `config/ds/*.yaml` and `config/rl/*.yaml`: hyperparameters specific to each DRL method and regularization approach. Configurations with `_base` use BASE regularization; configs with `_none` use no regularization; configs with `_coeff_base` and `_coeff_none` use BOTH and COEFF regularizations, respectively.
+  - The current `ds_none`, `ds_base`, `ddpg_none`, `ddpg_base`, `ppo_none`, and `ppo_base` configs include a corresponding set of tuned hyperparameters for Setting 1.
 - `config/hyperparameter_registry.py`: search ranges for Ray Tune.
 
 ## Training
@@ -91,7 +94,7 @@ python rl/hyperparameter_sweep_ppo.py --config config/rl/ppo_none.yaml
 ## Benchmarks
 
 - **Setting 1**: empirical dynamic programming, computed in `dp_inventory.py`.
-- **Settings 2 & 3**: approximated by running DS with 100 testing samples.
+- **Settings 2 & 3**: approximated by running DS with testing samples.
 - **Setting 4**: computed in `synthetic_data/gene_syn_data_iid.py` along with data generation.
 
 ## Requirements

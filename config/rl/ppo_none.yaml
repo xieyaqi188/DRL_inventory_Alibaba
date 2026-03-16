@@ -1,0 +1,28 @@
+includes:
+  - ../global.yaml
+
+setup:
+  model_name: ppo
+  action_mode: rl_none  # rl_none, rl_base, rl_none_coeff, rl_base_coeff
+
+  total_steps: 200000  # Total environment steps
+  eval_freq: 2048  # Frequency of model evaluation (in steps)
+
+  learning_rate: 0.0008779614463161283
+  n_steps: 2048
+  batch_size: 128
+  clip_range: 0.16955957264915517
+  vf_coef: 0.4
+  max_grad_norm: 0.5
+  n_epochs: 10
+  target_kl: null
+  patience: 10  # Number of evaluations without improvement before early stopping
+  lr_min: 1.673176233255543e-05  # Minimum learning rate for learning rate scheduling
+  lr_fraction: 0.9  # Fraction of total steps at which learning rate reaches minimum
+  ent_coef: 0.38209114338807504
+  gamma: 0.9942241152540874
+  gae_lambda: 0.5762780406624142
+  initial_action_bias: 0.2820790201859893  # Initial action bias as fraction of action space (0.0-1.0)
+  net_arch:
+    pi: [ 256, 256 ]     # Actor
+    vf: [ 256, 256 ]    # Critic

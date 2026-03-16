@@ -1,0 +1,18 @@
+global:
+  seed: 45
+  loss_alpha: 0.1 # (1 - loss_alpha) * (stockout_pen or underage) + loss_alpha * (turnover_pen or overage)
+  max_turnover: 28
+  max_replenish: 100 # evaluated based on lead-time and max demand
+
+  lost_sales_demand: false  # true = lost sales (clip inventory at 0); false = backlog
+  # true bp, period_num and lead_time of each product are from csv;
+  bp: 2
+  max_period_num: 31 # max horizon length
+  max_lead_time: 1 # need to be >= 1
+
+  # train/val/test split determined by JSON files (train.json, val.json, test.json)
+  data_directory: "synthetic_data/data_ind_perffeat_T31_train10"
+
+
+
+

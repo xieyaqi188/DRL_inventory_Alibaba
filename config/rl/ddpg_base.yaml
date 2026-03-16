@@ -1,0 +1,27 @@
+includes:
+  - ../global.yaml
+
+setup:
+  model_name: ddpg
+  action_mode: rl_base  # rl_none, rl_base, rl_none_coeff, rl_base_coeff
+
+  total_steps: 200000  # Total environment steps
+  eval_freq: 1024  # Frequency of model evaluation (in steps)
+
+  learning_rate: 0.003951175502941127  # for both actor and critic networks
+  tau: 0.001026514664075085
+  batch_size: 128
+  gradient_steps: 1
+  learning_starts: 1000
+  buffer_size: 20000
+  patience: 10  # Number of evaluations without improvement before early stopping
+  lr_min: 0.00017421674247019648  # Minimum learning rate for learning rate scheduling
+  lr_fraction: 0.95  # Fraction of total steps at which learning rate reaches minimum
+  train_freq:  1
+  q_value_print_freq: 500  # Frequency of Q-value printing during training (in steps)
+  action_noise: None  # Exploration noise type (None = no noise, alternative: OrnsteinUhlenbeckActionNoise)
+  gamma: 0.9881374276312332
+  initial_action_bias: 0.47504325849895146 # Initial action bias as fraction of action space (0.0-1.0)
+  net_arch:
+    pi: [64, 64]     # Actor
+    qf: [64, 64]    # Critic

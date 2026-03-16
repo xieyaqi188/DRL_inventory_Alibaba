@@ -1,0 +1,17 @@
+includes:
+  - ../global.yaml
+
+setup:
+  action_mode: ds_none_coeff  # ds_none, ds_base, ds_none_coeff, ds_base_coeff
+  output_size: 5  # (MUST MATCH ABOVE, 1 for none and base, 5 for the _coeff)
+
+  epochs: 3000 # max number of training iterations
+
+  batch_size: 20
+  learning_rate: 1e-3
+  initial_action_bias: 0.5 # Initial bias as ratio of max_replenish (0.0-1.0)
+  neurons_per_hidden_layer: [64, 64]
+  inner_layer_activation: elu
+  output_layer_activation: relu
+  patience: 30  # Number of epochs to wait for improvement before early stopping
+  scheduler_factor: 0.9 # Factor by which learning rate is reduced when loss plateaus

@@ -15,9 +15,9 @@ class HyperparameterConfig:
 
 
 def create_ds_config() -> HyperparameterConfig:
-    """DS hyperparameters."""
+    """Differentiable Simulator (DS) hyperparameters."""
     return HyperparameterConfig(
-        description="Deep Learning (Neural Network) hyperparameters",
+        description="Differentiable Simulator (DS) hyperparameters",
         grid_search={
         },
         ray_tune_search={

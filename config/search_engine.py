@@ -3,15 +3,13 @@
 
 import os
 import sys
-import json
 import subprocess
 import tempfile
 import shutil
 import time
 import itertools
-from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, List, Tuple, Callable, Optional
+from typing import Dict, Any, List, Callable, Optional
 from dataclasses import dataclass
 
 # Set Ray environment variables before importing Ray
@@ -19,16 +17,13 @@ os.environ["RAY_DEDUP_LOGS"] = "0"
 
 import ray
 from ray import tune
-from ray.tune.schedulers import ASHAScheduler
 from ray.tune.search.optuna import OptunaSearch
 import yaml
-import numpy as np
 
 # Add project root to Python path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from utils import fix_seed
 from config.hyperparameter_registry import get_hyperparameters, standardize_parameters
 
 

@@ -1,13 +1,9 @@
 import copy
-import time
 import torch
-import json
 import sys
 from pathlib import Path
-
 import numpy as np
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-from tqdm import tqdm
 
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
@@ -16,12 +12,12 @@ from ds.neural_network import NeuralNetworkCreator
 from ds.dataset import build_dataloaders
 from rl.inv_env import InventorySimEnv
 from ds.simulation import Simulator
-from paths import get_data_file_path
 from utils import to_metrics_dict
 import paths
 
 # Global variable to switch between tr_eval_loss and val_loss for evaluation
 USE_VAL_LOSS_FOR_EVAL = True
+
 
 class EarlyStopping:
     def __init__(self, patience=10, min_delta=0):

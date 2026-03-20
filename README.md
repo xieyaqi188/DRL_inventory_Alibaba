@@ -28,9 +28,9 @@ config/                         # Configuration files
 synthetic_data/                 # Data generation scripts and generated datasets
 ├── gene_syn_data_ind.py        # Setting 1: independent demand
 ├── gene_syn_data_ar1.py        # Settings 2 & 3: AR(1) demand
-└── gene_syn_data_iid.py        # Setting 4: i.i.d. demand
+└── gene_syn_data_iid.py        # Setting 4: IID demand
 
-ds/                             # Direct Supervision (DS) model
+ds/                             # Differentiable Simulator (DS) 
 ├── main_ds.py                  # Training entry point
 ├── hyperparameter_sweep_ds.py  # Hyperparameter tuning
 ├── trainer.py                  # Training loop
@@ -52,16 +52,17 @@ rl/                             # Reinforcement Learning (DDPG & PPO)
 
 Scripts are in `synthetic_data/`:
 
-- **Setting 1** (independent demand): `gene_syn_data_ind.py`
+- **Setting 1** (Independent demand): `gene_syn_data_ind.py`
 - **Settings 2 & 3** (AR(1) demand): `gene_syn_data_ar1.py`
 - **Setting 4** (IID demand): `gene_syn_data_iid.py`
 
 ## Configuration
 
 - `config/global.yaml`: global parameters (lead time, review period, max replenishment, etc.)
-- `config/ds/*.yaml` and `config/rl/*.yaml`: hyperparameters specific to each DRL method and regularization approach. Configurations with `_base` use BASE regularization; configs with `_none` use no regularization; configs with `_coeff_base` and `_coeff_none` use BOTH and COEFF regularizations, respectively.
+- `config/ds/*.yaml` and `config/rl/*.yaml`: hyperparameters specific to DRL methods and regularizations. Configurations with `_base` use BASE regularization; configs with `_none` use no regularization; configs with `_coeff_base` and `_coeff_none` use BOTH and COEFF regularizations, respectively.
   - The current `ds_none`, `ds_base`, `ddpg_none`, `ddpg_base`, `ppo_none`, and `ppo_base` configs include a corresponding set of tuned hyperparameters for Setting 1.
 - `config/hyperparameter_registry.py`: search ranges for Ray Tune.
+  - The current script includes the search ranges for Setting 1.
 
 ## Training
 
@@ -78,7 +79,7 @@ python rl/main_rl.py --configs config/rl/ddpg_none.yaml
 python rl/main_rl.py --configs config/rl/ppo_none.yaml
 ```
 
-### Hyperparameter Sweep
+### Hyperparameter Tuning
 
 ```bash
 # DS
@@ -109,9 +110,3 @@ python rl/hyperparameter_sweep_ppo.py --config config/rl/ppo_none.yaml
 - ray[tune]
 - tqdm
 - matplotlib
-
-Install all dependencies:
-
-```bash
-pip install numpy pandas pyyaml torch stable-baselines3 gymnasium "ray[tune]" tqdm matplotlib
-```

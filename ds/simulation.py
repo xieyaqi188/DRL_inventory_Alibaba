@@ -1,18 +1,11 @@
 ### Differentiable Simulator
 
-import os
 import torch
-from torch import nn
-from torch.utils.data import Dataset, DataLoader
 import gymnasium as gym
 from gymnasium import spaces
 from collections import defaultdict as DefaultDict
 
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import datetime
-import copy
 
 
 class Simulator(gym.Env):

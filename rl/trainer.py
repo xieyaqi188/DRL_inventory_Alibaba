@@ -1,7 +1,5 @@
-import json
 import math
 import os
-import time
 import sys
 from pathlib import Path
 
@@ -9,11 +7,10 @@ import numpy as np
 from stable_baselines3 import PPO, DDPG
 from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.callbacks import (
-    EvalCallback, StopTrainingOnNoModelImprovement, BaseCallback
+    EvalCallback, StopTrainingOnNoModelImprovement
 )
 from stable_baselines3.common.utils import get_linear_fn
 import torch.nn as nn
-
 
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
